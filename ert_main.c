@@ -36,95 +36,45 @@ static real_T feedback_control_Y_LED_OUT;
 /* '<Root>/Trigger_OUT' */
 static real_T feedback_control_Y_Trigger_OUT;
 
-/*
- * Associating rt_OneStep with a real-time clock or interrupt service routine
- * is what makes the generated code "real-time".  The function rt_OneStep is
- * always associated with the base rate of the model.  Subrates are managed
- * by the base rate from inside the generated code.  Enabling/disabling
- * interrupts and floating point context switches are target specific.  This
- * example code indicates where these should take place relative to executing
- * the generated code step function.  Overrun behavior should be tailored to
- * your application needs.  This example simply sets an error status in the
- * real-time model and returns from rt_OneStep.
- */
-void rt_OneStep(RT_MODEL_feedback_control *const feedback_control_M);
-void rt_OneStep(RT_MODEL_feedback_control *const feedback_control_M)
-{
-  static boolean_T OverrunFlag = false;
+void setup(){
+	/* Pack model data into RTM */
+  	feedback_control_M->dwork = &feedback_control_DWork;
 
-  /* Disable interrupts here */
-
-  /* Check for overrun */
-  if (OverrunFlag) {
-    rtmSetErrorStatus(feedback_control_M, "Overrun");
-    return;
-  }
-
-  OverrunFlag = true;
-
-  /* Save FPU context here (if necessary) */
-  /* Re-enable timer or interrupt here */
-  /* Set model inputs here */
-
-  /* Step the model */
-  feedback_control_step(feedback_control_M, feedback_control_U_Echo_IN,
-                        &feedback_control_Y_LED_OUT,
-                        &feedback_control_Y_Trigger_OUT);
-
-  /* Get model outputs here */
-
-  /* Indicate task complete */
-  OverrunFlag = false;
-
-  /* Disable interrupts here */
-  /* Restore FPU context here (if necessary) */
-  /* Enable interrupts here */
+  	/* Initialize model */
+  	feedback_control_initialize(feedback_control_M, &feedback_control_U_Echo_IN,
+    	&feedback_control_Y_LED_OUT, &feedback_control_Y_Trigger_OUT);
 }
 
-/*
- * The example "main" function illustrates what is required by your
- * application code to initialize, execute, and terminate the generated code.
- * Attaching rt_OneStep to a real-time clock is target specific.  This example
- * illustrates how you do this relative to initializing the model.
- */
-int_T main(int_T argc, const char *argv[])
-{
-  RT_MODEL_feedback_control *const feedback_control_M = feedback_control_MPtr;
-
-  /* Unused arguments */
-  (void)(argc);
-  (void)(argv);
-
-  /* Pack model data into RTM */
-  feedback_control_M->dwork = &feedback_control_DWork;
-
-  /* Initialize model */
-  feedback_control_initialize(feedback_control_M, &feedback_control_U_Echo_IN,
-    &feedback_control_Y_LED_OUT, &feedback_control_Y_Trigger_OUT);
-
-  /* Attach rt_OneStep to a timer or interrupt service routine with
-   * period 1.0E-6 seconds (the model's base sample time) here.  The
-   * call syntax for rt_OneStep is
-   *
-   *  rt_OneStep(feedback_control_M);
-   */
-  printf("Warning: The simulation will run forever. "
-         "Generated ERT main won't simulate model step behavior. "
-         "To change this behavior select the 'MAT-file logging' option.\n");
-  fflush((NULL));
-  while (rtmGetErrorStatus(feedback_control_M) == (NULL)) {
-    /*  Perform other application tasks here */
-  }
-
-  /* Disable rt_OneStep() here */
-
-  /* Terminate model */
-  feedback_control_terminate(feedback_control_M);
-  return 0;
+int main(int argc, char** argv){
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TEST();
 }
 
-/*
- * File trailer for generated code.
- *
- * [EOF]
- */
+TEST(Tests, TriggerPulse){
+    int i;
+
+    setup();
+
+    fprintf(stderr, "Trigger test, should be 1 for at least 10 usec, then 0 for at least 60ms!\n");
+
+    controller_step(controller_MPtr, controller_U_echo, &controller_Y_trigger, &controller_Y_LED);
+    EXPECT_EQ(controller_Y_trigger, 1) << "The trigger should start at 1"; //trig = 1
+
+    controller_step(controller_MPtr, controller_U_echo, &controller_Y_trigger, &controller_Y_LED);
+    controller_step(controller_MPtr, controller_U_echo, &controller_Y_trigger, &controller_Y_LED);
+
+    //2 step -> 20 usec
+
+    EXPECT_EQ(controller_Y_trigger, 1) << "After few step, the trigger should be still 1";
+    while (controller_Y_trigger == 1)
+    {
+        controller_step(controller_MPtr, controller_U_echo, &controller_Y_trigger, &controller_Y_LED);
+    } //wait until the trigger goes to 0
+    EXPECT_EQ(controller_Y_trigger, 0);
+    //trig = 0 => for at least 60 ms
+    for (i = 0; i <= 6000; i++)
+    {
+        controller_step(controller_MPtr, controller_U_echo, &controller_Y_trigger, &controller_Y_LED);
+    } //10 usec * 60 ms = 6000 step
+    EXPECT_EQ(controller_Y_trigger, 0) << "After few step, the trigger should be still 0";
+}
