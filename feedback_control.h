@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'feedback_control'.
  *
- * Model version                  : 1.82
+ * Model version                  : 1.89
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Tue May 18 18:22:19 2021
+ * C/C++ source code generated on : Fri May 28 18:03:06 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -55,8 +55,8 @@ typedef struct {
   real_T m2;                           /* '<Root>/Chart' */
   real_T m4;                           /* '<Root>/Chart' */
   real_T check;                        /* '<Root>/Chart' */
-  uint32_T temporalCounter_i1;         /* '<Root>/Chart' */
   uint32_T temporalCounter_i2;         /* '<Root>/Chart' */
+  uint16_T temporalCounter_i1;         /* '<Root>/Chart' */
   uint8_T is_active_c3_feedback_control;/* '<Root>/Chart' */
   uint8_T is_GENERATE_TRIGGER;         /* '<Root>/Chart' */
   uint8_T is_MEASURES;                 /* '<Root>/Chart' */

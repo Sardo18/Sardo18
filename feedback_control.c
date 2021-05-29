@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'feedback_control'.
  *
- * Model version                  : 1.82
+ * Model version                  : 1.89
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Tue May 18 18:22:19 2021
+ * C/C++ source code generated on : Fri May 28 18:03:06 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -152,7 +152,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
       *feedback_control_Y_LED_OUT = 0.0;
 
       /* During 'OFF': '<S1>:23' */
-      if (feedback_control_DWork->temporalCounter_i2 >= 500000U) {
+      if (feedback_control_DWork->temporalCounter_i2 >= 50000U) {
         /* Transition: '<S1>:63' */
         feedback_control_DWork->is_ERROR_BLINK = feedback_control_IN_ON;
         feedback_control_DWork->temporalCounter_i2 = 0U;
@@ -166,7 +166,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
       *feedback_control_Y_LED_OUT = 1.0;
 
       /* During 'ON': '<S1>:21' */
-      if (feedback_control_DWork->temporalCounter_i2 >= 500000U) {
+      if (feedback_control_DWork->temporalCounter_i2 >= 50000U) {
         /* Transition: '<S1>:62' */
         feedback_control_DWork->is_ERROR_BLINK = feedback_control_IN_OFF;
         feedback_control_DWork->temporalCounter_i2 = 0U;
@@ -217,7 +217,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
         /* During 'OFF': '<S1>:25' */
         if (feedback_control_DWork->temporalCounter_i2 >= ((uint32_T)ceil(((0.1
-                - LedON) / 1.0E-6) - 1.0E-14))) {
+                - LedON) / 1.0E-5) - 1.0000000000000002E-13))) {
           /* Transition: '<S1>:64' */
           feedback_control_DWork->is_FROM_10_TO_100_BLINK =
             feedback_control_IN_ON_e;
@@ -235,7 +235,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
         /* During 'ON': '<S1>:24' */
         if (feedback_control_DWork->temporalCounter_i2 >= ((uint32_T)ceil((LedON
-               / 1.0E-6) - 1.0E-14))) {
+               / 1.0E-5) - 1.0000000000000002E-13))) {
           /* Transition: '<S1>:65' */
           feedback_control_DWork->is_FROM_10_TO_100_BLINK =
             feedback_control_IN_OFF_o;
@@ -280,7 +280,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
       *feedback_control_Y_LED_OUT = 0.0;
 
       /* During 'OFF': '<S1>:27' */
-      if (feedback_control_DWork->temporalCounter_i2 >= 250000U) {
+      if (feedback_control_DWork->temporalCounter_i2 >= 25000U) {
         /* Transition: '<S1>:67' */
         feedback_control_DWork->is_OTHER_BLINK = feedback_control_IN_ON;
         feedback_control_DWork->temporalCounter_i2 = 0U;
@@ -294,7 +294,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
       *feedback_control_Y_LED_OUT = 1.0;
 
       /* During 'ON': '<S1>:26' */
-      if (feedback_control_DWork->temporalCounter_i2 >= 250000U) {
+      if (feedback_control_DWork->temporalCounter_i2 >= 25000U) {
         /* Transition: '<S1>:66' */
         feedback_control_DWork->is_OTHER_BLINK = feedback_control_IN_OFF;
         feedback_control_DWork->temporalCounter_i2 = 0U;
@@ -318,7 +318,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
   /* Chart: '<Root>/Chart' incorporates:
    *  Inport: '<Root>/Echo_IN'
    */
-  if (feedback_control_DWork->temporalCounter_i1 < 131071U) {
+  if (feedback_control_DWork->temporalCounter_i1 < 16383U) {
     feedback_control_DWork->temporalCounter_i1++;
   }
 
@@ -353,7 +353,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
     *feedback_control_Y_LED_OUT = 0.0;
 
     /* Entry 'COMPUTE': '<S1>:31' */
-    feedback_control_DWork->step = 1.0;
+    feedback_control_DWork->step = 10.0;
 
     /* Entry Internal 'COMPUTE': '<S1>:31' */
     /* Entry 'MOVING_AVG': '<S1>:52' */
@@ -384,7 +384,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
       *feedback_control_Y_Trigger_OUT = 0.0;
 
       /* During 'DISABLE': '<S1>:9' */
-      if (feedback_control_DWork->temporalCounter_i1 >= 100000U) {
+      if (feedback_control_DWork->temporalCounter_i1 >= 10000U) {
         /* Transition: '<S1>:10' */
         feedback_control_DWork->is_GENERATE_TRIGGER = feedback_control_IN_ENABLE;
         feedback_control_DWork->temporalCounter_i1 = 0U;
@@ -398,7 +398,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
       *feedback_control_Y_Trigger_OUT = 1.0;
 
       /* During 'ENABLE': '<S1>:7' */
-      if (feedback_control_DWork->temporalCounter_i1 >= 1000U) {
+      if (feedback_control_DWork->temporalCounter_i1 >= 100U) {
         /* Transition: '<S1>:11' */
         feedback_control_DWork->is_GENERATE_TRIGGER =
           feedback_control_IN_DISABLE;
