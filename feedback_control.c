@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'feedback_control'.
  *
- * Model version                  : 1.93
+ * Model version                  : 1.97
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Jun 21 20:00:01 2021
+ * C/C++ source code generated on : Mon Jun 21 20:25:56 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -48,7 +48,7 @@
 #define feedback_control_IN_START      ((uint8_T)5U)
 
 /* Forward declaration for local functions */
-static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
+static void feedback_control_BLINK(uint8_T *feedback_control_Y_LED_OUT,
   D_Work_feedback_control *feedback_control_DWork);
 
 /*===========*
@@ -82,7 +82,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 #endif
 
 /* Function for Chart: '<Root>/Chart' */
-static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
+static void feedback_control_BLINK(uint8_T *feedback_control_Y_LED_OUT,
   D_Work_feedback_control *feedback_control_DWork)
 {
   real_T LedON;
@@ -104,7 +104,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
       /* Outport: '<Root>/LED_OUT' */
       /* Entry 'ON': '<S1>:21' */
-      *feedback_control_Y_LED_OUT = 1.0;
+      *feedback_control_Y_LED_OUT = 1U;
     } else if ((feedback_control_DWork->Distance_AVG >= 10.0) &&
                (feedback_control_DWork->Distance_AVG <= 100.0)) {
       /* Transition: '<S1>:59' */
@@ -118,7 +118,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
       /* Outport: '<Root>/LED_OUT' */
       /* Entry 'ON': '<S1>:24' */
-      *feedback_control_Y_LED_OUT = 1.0;
+      *feedback_control_Y_LED_OUT = 1U;
     } else {
       /* Transition: '<S1>:89' */
       feedback_control_DWork->is_BLINK = feedback_control_IN_OTHER_BLINK;
@@ -130,7 +130,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
       /* Outport: '<Root>/LED_OUT' */
       /* Entry 'ON': '<S1>:26' */
-      *feedback_control_Y_LED_OUT = 1.0;
+      *feedback_control_Y_LED_OUT = 1U;
     }
     break;
 
@@ -145,11 +145,11 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
       /* Outport: '<Root>/LED_OUT' */
       /* Entry 'DEFAULT': '<S1>:35' */
-      *feedback_control_Y_LED_OUT = 0.0;
+      *feedback_control_Y_LED_OUT = 0U;
     } else if (feedback_control_DWork->is_ERROR_BLINK == feedback_control_IN_OFF)
     {
       /* Outport: '<Root>/LED_OUT' */
-      *feedback_control_Y_LED_OUT = 0.0;
+      *feedback_control_Y_LED_OUT = 0U;
 
       /* During 'OFF': '<S1>:23' */
       if (feedback_control_DWork->temporalCounter_i2 >= 50000U) {
@@ -159,11 +159,11 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
         /* Outport: '<Root>/LED_OUT' */
         /* Entry 'ON': '<S1>:21' */
-        *feedback_control_Y_LED_OUT = 1.0;
+        *feedback_control_Y_LED_OUT = 1U;
       }
     } else {
       /* Outport: '<Root>/LED_OUT' */
-      *feedback_control_Y_LED_OUT = 1.0;
+      *feedback_control_Y_LED_OUT = 1U;
 
       /* During 'ON': '<S1>:21' */
       if (feedback_control_DWork->temporalCounter_i2 >= 50000U) {
@@ -173,7 +173,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
         /* Outport: '<Root>/LED_OUT' */
         /* Entry 'OFF': '<S1>:23' */
-        *feedback_control_Y_LED_OUT = 0.0;
+        *feedback_control_Y_LED_OUT = 0U;
       }
     }
     break;
@@ -190,13 +190,13 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
       /* Outport: '<Root>/LED_OUT' */
       /* Entry 'DEFAULT': '<S1>:35' */
-      *feedback_control_Y_LED_OUT = 0.0;
+      *feedback_control_Y_LED_OUT = 0U;
     } else {
       LedON = (feedback_control_DWork->Distance_AVG * 0.1) / 100.0;
       switch (feedback_control_DWork->is_FROM_10_TO_100_BLINK) {
        case feedback_control_IN_ALWAYS1:
         /* Outport: '<Root>/LED_OUT' */
-        *feedback_control_Y_LED_OUT = 1.0;
+        *feedback_control_Y_LED_OUT = 1U;
 
         /* During 'ALWAYS1': '<S1>:131' */
         if (feedback_control_DWork->Distance_AVG < 100.0) {
@@ -207,13 +207,13 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
           /* Outport: '<Root>/LED_OUT' */
           /* Entry 'ON': '<S1>:24' */
-          *feedback_control_Y_LED_OUT = 1.0;
+          *feedback_control_Y_LED_OUT = 1U;
         }
         break;
 
        case feedback_control_IN_OFF_o:
         /* Outport: '<Root>/LED_OUT' */
-        *feedback_control_Y_LED_OUT = 0.0;
+        *feedback_control_Y_LED_OUT = 0U;
 
         /* During 'OFF': '<S1>:25' */
         if (feedback_control_DWork->temporalCounter_i2 >= ((uint32_T)ceil(((0.1
@@ -225,13 +225,13 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
           /* Outport: '<Root>/LED_OUT' */
           /* Entry 'ON': '<S1>:24' */
-          *feedback_control_Y_LED_OUT = 1.0;
+          *feedback_control_Y_LED_OUT = 1U;
         }
         break;
 
        default:
         /* Outport: '<Root>/LED_OUT' */
-        *feedback_control_Y_LED_OUT = 1.0;
+        *feedback_control_Y_LED_OUT = 1U;
 
         /* During 'ON': '<S1>:24' */
         if (feedback_control_DWork->temporalCounter_i2 >= ((uint32_T)ceil((LedON
@@ -243,7 +243,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
           /* Outport: '<Root>/LED_OUT' */
           /* Entry 'OFF': '<S1>:25' */
-          *feedback_control_Y_LED_OUT = 0.0;
+          *feedback_control_Y_LED_OUT = 0U;
         } else {
           if (feedback_control_DWork->Distance_AVG == 100.0) {
             /* Transition: '<S1>:130' */
@@ -252,7 +252,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
             /* Outport: '<Root>/LED_OUT' */
             /* Entry 'ALWAYS1': '<S1>:131' */
-            *feedback_control_Y_LED_OUT = 1.0;
+            *feedback_control_Y_LED_OUT = 1U;
           }
         }
         break;
@@ -273,11 +273,11 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
       /* Outport: '<Root>/LED_OUT' */
       /* Entry 'DEFAULT': '<S1>:35' */
-      *feedback_control_Y_LED_OUT = 0.0;
+      *feedback_control_Y_LED_OUT = 0U;
     } else if (feedback_control_DWork->is_OTHER_BLINK == feedback_control_IN_OFF)
     {
       /* Outport: '<Root>/LED_OUT' */
-      *feedback_control_Y_LED_OUT = 0.0;
+      *feedback_control_Y_LED_OUT = 0U;
 
       /* During 'OFF': '<S1>:27' */
       if (feedback_control_DWork->temporalCounter_i2 >= 25000U) {
@@ -287,11 +287,11 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
         /* Outport: '<Root>/LED_OUT' */
         /* Entry 'ON': '<S1>:26' */
-        *feedback_control_Y_LED_OUT = 1.0;
+        *feedback_control_Y_LED_OUT = 1U;
       }
     } else {
       /* Outport: '<Root>/LED_OUT' */
-      *feedback_control_Y_LED_OUT = 1.0;
+      *feedback_control_Y_LED_OUT = 1U;
 
       /* During 'ON': '<S1>:26' */
       if (feedback_control_DWork->temporalCounter_i2 >= 25000U) {
@@ -301,7 +301,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
         /* Outport: '<Root>/LED_OUT' */
         /* Entry 'OFF': '<S1>:27' */
-        *feedback_control_Y_LED_OUT = 0.0;
+        *feedback_control_Y_LED_OUT = 0U;
       }
     }
     break;
@@ -310,8 +310,8 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
 
 /* Model step function */
 void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
-  real_T feedback_control_U_Echo_IN, real_T *feedback_control_Y_LED_OUT, real_T *
-  feedback_control_Y_Trigger_OUT)
+  uint8_T feedback_control_U_Echo_IN, uint8_T *feedback_control_Y_LED_OUT,
+  uint8_T *feedback_control_Y_Trigger_OUT)
 {
   D_Work_feedback_control *feedback_control_DWork = feedback_control_M->dwork;
 
@@ -340,7 +340,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
     /* Outport: '<Root>/Trigger_OUT' */
     /* Entry 'ENABLE': '<S1>:7' */
-    *feedback_control_Y_Trigger_OUT = 1.0;
+    *feedback_control_Y_Trigger_OUT = 1U;
 
     /* Entry 'COMPUTE_AND_BLINK': '<S1>:12' */
     /* Entry Internal 'COMPUTE_AND_BLINK': '<S1>:12' */
@@ -350,7 +350,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
     /* Outport: '<Root>/LED_OUT' */
     /* Entry 'DEFAULT': '<S1>:35' */
-    *feedback_control_Y_LED_OUT = 0.0;
+    *feedback_control_Y_LED_OUT = 0U;
 
     /* Entry 'COMPUTE': '<S1>:31' */
     feedback_control_DWork->step = 10.0;
@@ -381,7 +381,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
     if (feedback_control_DWork->is_GENERATE_TRIGGER ==
         feedback_control_IN_DISABLE) {
       /* Outport: '<Root>/Trigger_OUT' */
-      *feedback_control_Y_Trigger_OUT = 0.0;
+      *feedback_control_Y_Trigger_OUT = 0U;
 
       /* During 'DISABLE': '<S1>:9' */
       if (feedback_control_DWork->temporalCounter_i1 >= 10000U) {
@@ -391,11 +391,11 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
         /* Outport: '<Root>/Trigger_OUT' */
         /* Entry 'ENABLE': '<S1>:7' */
-        *feedback_control_Y_Trigger_OUT = 1.0;
+        *feedback_control_Y_Trigger_OUT = 1U;
       }
     } else {
       /* Outport: '<Root>/Trigger_OUT' */
-      *feedback_control_Y_Trigger_OUT = 1.0;
+      *feedback_control_Y_Trigger_OUT = 1U;
 
       /* During 'ENABLE': '<S1>:7' */
       if (feedback_control_DWork->temporalCounter_i1 >= 100U) {
@@ -406,7 +406,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
         /* Outport: '<Root>/Trigger_OUT' */
         /* Entry 'DISABLE': '<S1>:9' */
-        *feedback_control_Y_Trigger_OUT = 0.0;
+        *feedback_control_Y_Trigger_OUT = 0U;
       }
     }
 
@@ -445,7 +445,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
     switch (feedback_control_DWork->is_MEASURES) {
      case feedback_control_IN_MEASURE1:
       /* During 'MEASURE1': '<S1>:13' */
-      if (feedback_control_U_Echo_IN == 0.0) {
+      if (feedback_control_U_Echo_IN == 0) {
         /* Transition: '<S1>:38' */
         /* Exit 'MEASURE1': '<S1>:13' */
         feedback_control_DWork->measure1 = feedback_control_DWork->m1 / 58.0;
@@ -459,7 +459,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_control_IN_MEASURE2:
       /* During 'MEASURE2': '<S1>:15' */
-      if (feedback_control_U_Echo_IN == 0.0) {
+      if (feedback_control_U_Echo_IN == 0) {
         /* Transition: '<S1>:41' */
         /* Exit 'MEASURE2': '<S1>:15' */
         feedback_control_DWork->measure2 = feedback_control_DWork->m2 / 58.0;
@@ -471,7 +471,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_control_IN_MEASURE3:
       /* During 'MEASURE3': '<S1>:16' */
-      if (feedback_control_U_Echo_IN == 0.0) {
+      if (feedback_control_U_Echo_IN == 0) {
         /* Transition: '<S1>:44' */
         /* Exit 'MEASURE3': '<S1>:16' */
         feedback_control_DWork->measure3 = feedback_control_DWork->m3 / 58.0;
@@ -483,7 +483,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_control_IN_MEASURE4:
       /* During 'MEASURE4': '<S1>:17' */
-      if (feedback_control_U_Echo_IN == 0.0) {
+      if (feedback_control_U_Echo_IN == 0) {
         /* Transition: '<S1>:48' */
         /* Exit 'MEASURE4': '<S1>:17' */
         feedback_control_DWork->measure4 = feedback_control_DWork->m4 / 58.0;
@@ -496,8 +496,8 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_control_IN_START:
       /* During 'START': '<S1>:81' */
-      if ((feedback_control_U_Echo_IN == 1.0) && (feedback_control_DWork->online
-           == 1)) {
+      if ((feedback_control_U_Echo_IN == 1) && (feedback_control_DWork->online ==
+           1)) {
         /* Transition: '<S1>:84' */
         feedback_control_DWork->is_MEASURES = feedback_control_IN_MEASURE1;
 
@@ -508,7 +508,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_contro_IN_WAIT_MEASURE:
       /* During 'WAIT_MEASURE': '<S1>:47' */
-      if (feedback_control_U_Echo_IN == 1.0) {
+      if (feedback_control_U_Echo_IN == 1) {
         /* Transition: '<S1>:49' */
         feedback_control_DWork->is_MEASURES = feedback_control_IN_MEASURE1;
 
@@ -528,7 +528,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_contr_IN_WAIT_MEASURE2:
       /* During 'WAIT_MEASURE2': '<S1>:37' */
-      if (feedback_control_U_Echo_IN == 1.0) {
+      if (feedback_control_U_Echo_IN == 1) {
         /* Transition: '<S1>:39' */
         feedback_control_DWork->is_MEASURES = feedback_control_IN_MEASURE2;
 
@@ -548,7 +548,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_contr_IN_WAIT_MEASURE3:
       /* During 'WAIT_MEASURE3': '<S1>:40' */
-      if (feedback_control_U_Echo_IN == 1.0) {
+      if (feedback_control_U_Echo_IN == 1) {
         /* Transition: '<S1>:42' */
         feedback_control_DWork->is_MEASURES = feedback_control_IN_MEASURE3;
 
@@ -568,7 +568,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      default:
       /* During 'WAIT_MEASURE4': '<S1>:43' */
-      if (feedback_control_U_Echo_IN == 1.0) {
+      if (feedback_control_U_Echo_IN == 1) {
         /* Transition: '<S1>:45' */
         feedback_control_DWork->is_MEASURES = feedback_control_IN_MEASURE4;
 
@@ -600,7 +600,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
         /* Entry 'DISCONNECTED': '<S1>:78' */
         feedback_control_DWork->online = 0U;
         feedback_control_DWork->Distance_AVG = 0.0;
-      } else if (feedback_control_U_Echo_IN == 1.0) {
+      } else if (feedback_control_U_Echo_IN == 1) {
         /* Transition: '<S1>:124' */
         /* Exit 'CHECK': '<S1>:120' */
         feedback_control_DWork->is_CHECK_CONNECTION =
@@ -615,7 +615,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      case feedback_control_IN_CONNECTED:
       /* During 'CONNECTED': '<S1>:76' */
-      if (feedback_control_U_Echo_IN == 0.0) {
+      if (feedback_control_U_Echo_IN == 0) {
         /* Transition: '<S1>:121' */
         feedback_control_DWork->is_CHECK_CONNECTION = feedback_control_IN_CHECK;
 
@@ -626,7 +626,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
      default:
       /* During 'DISCONNECTED': '<S1>:78' */
-      if (feedback_control_U_Echo_IN == 1.0) {
+      if (feedback_control_U_Echo_IN == 1) {
         /* Transition: '<S1>:122' */
         feedback_control_DWork->is_CHECK_CONNECTION =
           feedback_control_IN_CONNECTED;
@@ -643,8 +643,8 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
 /* Model initialize function */
 void feedback_control_initialize(RT_MODEL_feedback_control *const
-  feedback_control_M, real_T *feedback_control_U_Echo_IN, real_T
-  *feedback_control_Y_LED_OUT, real_T *feedback_control_Y_Trigger_OUT)
+  feedback_control_M, uint8_T *feedback_control_U_Echo_IN, uint8_T
+  *feedback_control_Y_LED_OUT, uint8_T *feedback_control_Y_Trigger_OUT)
 {
   D_Work_feedback_control *feedback_control_DWork = feedback_control_M->dwork;
 
@@ -655,11 +655,11 @@ void feedback_control_initialize(RT_MODEL_feedback_control *const
                 sizeof(D_Work_feedback_control));
 
   /* external inputs */
-  *feedback_control_U_Echo_IN = 0.0;
+  *feedback_control_U_Echo_IN = 0U;
 
   /* external outputs */
-  (*feedback_control_Y_LED_OUT) = 0.0;
-  (*feedback_control_Y_Trigger_OUT) = 0.0;
+  (*feedback_control_Y_LED_OUT) = 0U;
+  (*feedback_control_Y_Trigger_OUT) = 0U;
 
   /* SystemInitialize for Chart: '<Root>/Chart' */
   feedback_control_DWork->is_BLINK = feedback_con_IN_NO_ACTIVE_CHILD;

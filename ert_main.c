@@ -28,13 +28,13 @@ static RT_MODEL_feedback_control *const feedback_control_MPtr =
 static D_Work_feedback_control feedback_control_DWork;/* Observable states */
 
 /* '<Root>/Echo_IN' */
-static real_T feedback_control_U_Echo_IN;
+static uint8_T feedback_control_U_Echo_IN;
 
 /* '<Root>/LED_OUT' */
-static real_T feedback_control_Y_LED_OUT;
+static uint8_T feedback_control_Y_LED_OUT;
 
 /* '<Root>/Trigger_OUT' */
-static real_T feedback_control_Y_Trigger_OUT;
+static uint8_T feedback_control_Y_Trigger_OUT;
 
 void setup(){
 	/* Pack model data into RTM */

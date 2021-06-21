@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'feedback_control'.
  *
- * Model version                  : 1.93
+ * Model version                  : 1.97
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Jun 21 20:00:01 2021
+ * C/C++ source code generated on : Mon Jun 21 20:25:56 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -76,11 +76,11 @@ struct tag_RTM_feedback_control {
 
 /* Model entry point functions */
 extern void feedback_control_initialize(RT_MODEL_feedback_control *const
-  feedback_control_M, real_T *feedback_control_U_Echo_IN, real_T
-  *feedback_control_Y_LED_OUT, real_T *feedback_control_Y_Trigger_OUT);
+  feedback_control_M, uint8_T *feedback_control_U_Echo_IN, uint8_T
+  *feedback_control_Y_LED_OUT, uint8_T *feedback_control_Y_Trigger_OUT);
 extern void feedback_control_step(RT_MODEL_feedback_control *const
-  feedback_control_M, real_T feedback_control_U_Echo_IN, real_T
-  *feedback_control_Y_LED_OUT, real_T *feedback_control_Y_Trigger_OUT);
+  feedback_control_M, uint8_T feedback_control_U_Echo_IN, uint8_T
+  *feedback_control_Y_LED_OUT, uint8_T *feedback_control_Y_Trigger_OUT);
 extern void feedback_control_terminate(RT_MODEL_feedback_control *const
   feedback_control_M);
 
