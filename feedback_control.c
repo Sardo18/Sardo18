@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'feedback_control'.
  *
- * Model version                  : 1.89
+ * Model version                  : 1.93
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri May 28 18:03:06 2021
+ * C/C++ source code generated on : Mon Jun 21 20:00:01 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -91,7 +91,7 @@ static void feedback_control_BLINK(real_T *feedback_control_Y_LED_OUT,
   switch (feedback_control_DWork->is_BLINK) {
    case feedback_control_IN_DEFAULT_j:
     /* During 'DEFAULT': '<S1>:35' */
-    if (((feedback_control_DWork->online == 0.0) ||
+    if (((feedback_control_DWork->online == 0) ||
          (feedback_control_DWork->Distance_AVG < 2.0)) ||
         (feedback_control_DWork->Distance_AVG > 400.0)) {
       /* Transition: '<S1>:58' */
@@ -367,7 +367,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
 
     /* Entry 'START': '<S1>:81' */
     feedback_control_DWork->Distance_AVG = 0.0;
-    feedback_control_DWork->ready_to_compute = 0.0;
+    feedback_control_DWork->ready_to_compute = 0U;
 
     /* Entry 'CHECK_CONNECTION': '<S1>:75' */
     /* Entry Internal 'CHECK_CONNECTION': '<S1>:75' */
@@ -375,7 +375,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
     feedback_control_DWork->is_CHECK_CONNECTION = feedback_control_IN_CONNECTED;
 
     /* Entry 'CONNECTED': '<S1>:76' */
-    feedback_control_DWork->online = 1.0;
+    feedback_control_DWork->online = 1U;
   } else {
     /* During 'GENERATE_TRIGGER': '<S1>:6' */
     if (feedback_control_DWork->is_GENERATE_TRIGGER ==
@@ -418,7 +418,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
     if (feedback_control_DWork->is_MOVING_AVG == feedback_control_IN_COMPUTE_AVG)
     {
       /* During 'COMPUTE_AVG': '<S1>:55' */
-      if (feedback_control_DWork->online == 0.0) {
+      if (feedback_control_DWork->online == 0) {
         /* Transition: '<S1>:118' */
         feedback_control_DWork->is_MOVING_AVG = feedback_control_IN_DEFAULT;
       } else {
@@ -429,7 +429,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
       }
     } else {
       /* During 'DEFAULT': '<S1>:53' */
-      if (feedback_control_DWork->ready_to_compute == 1.0) {
+      if (feedback_control_DWork->ready_to_compute == 1) {
         /* Transition: '<S1>:56' */
         feedback_control_DWork->is_MOVING_AVG = feedback_control_IN_COMPUTE_AVG;
 
@@ -487,7 +487,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
         /* Transition: '<S1>:48' */
         /* Exit 'MEASURE4': '<S1>:17' */
         feedback_control_DWork->measure4 = feedback_control_DWork->m4 / 58.0;
-        feedback_control_DWork->ready_to_compute = 1.0;
+        feedback_control_DWork->ready_to_compute = 1U;
         feedback_control_DWork->is_MEASURES = feedback_contro_IN_WAIT_MEASURE;
       } else {
         feedback_control_DWork->m4 += feedback_control_DWork->step;
@@ -497,7 +497,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
      case feedback_control_IN_START:
       /* During 'START': '<S1>:81' */
       if ((feedback_control_U_Echo_IN == 1.0) && (feedback_control_DWork->online
-           == 1.0)) {
+           == 1)) {
         /* Transition: '<S1>:84' */
         feedback_control_DWork->is_MEASURES = feedback_control_IN_MEASURE1;
 
@@ -515,13 +515,13 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
         /* Entry 'MEASURE1': '<S1>:13' */
         feedback_control_DWork->m1 = feedback_control_DWork->step;
       } else {
-        if (feedback_control_DWork->online == 0.0) {
+        if (feedback_control_DWork->online == 0) {
           /* Transition: '<S1>:110' */
           feedback_control_DWork->is_MEASURES = feedback_control_IN_START;
 
           /* Entry 'START': '<S1>:81' */
           feedback_control_DWork->Distance_AVG = 0.0;
-          feedback_control_DWork->ready_to_compute = 0.0;
+          feedback_control_DWork->ready_to_compute = 0U;
         }
       }
       break;
@@ -535,13 +535,13 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
         /* Entry 'MEASURE2': '<S1>:15' */
         feedback_control_DWork->m2 = feedback_control_DWork->step;
       } else {
-        if (feedback_control_DWork->online == 0.0) {
+        if (feedback_control_DWork->online == 0) {
           /* Transition: '<S1>:99' */
           feedback_control_DWork->is_MEASURES = feedback_control_IN_START;
 
           /* Entry 'START': '<S1>:81' */
           feedback_control_DWork->Distance_AVG = 0.0;
-          feedback_control_DWork->ready_to_compute = 0.0;
+          feedback_control_DWork->ready_to_compute = 0U;
         }
       }
       break;
@@ -555,13 +555,13 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
         /* Entry 'MEASURE3': '<S1>:16' */
         feedback_control_DWork->m3 = feedback_control_DWork->step;
       } else {
-        if (feedback_control_DWork->online == 0.0) {
+        if (feedback_control_DWork->online == 0) {
           /* Transition: '<S1>:102' */
           feedback_control_DWork->is_MEASURES = feedback_control_IN_START;
 
           /* Entry 'START': '<S1>:81' */
           feedback_control_DWork->Distance_AVG = 0.0;
-          feedback_control_DWork->ready_to_compute = 0.0;
+          feedback_control_DWork->ready_to_compute = 0U;
         }
       }
       break;
@@ -575,13 +575,13 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
         /* Entry 'MEASURE4': '<S1>:17' */
         feedback_control_DWork->m4 = feedback_control_DWork->step;
       } else {
-        if (feedback_control_DWork->online == 0.0) {
+        if (feedback_control_DWork->online == 0) {
           /* Transition: '<S1>:107' */
           feedback_control_DWork->is_MEASURES = feedback_control_IN_START;
 
           /* Entry 'START': '<S1>:81' */
           feedback_control_DWork->Distance_AVG = 0.0;
-          feedback_control_DWork->ready_to_compute = 0.0;
+          feedback_control_DWork->ready_to_compute = 0U;
         }
       }
       break;
@@ -598,7 +598,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
           feedback_contro_IN_DISCONNECTED;
 
         /* Entry 'DISCONNECTED': '<S1>:78' */
-        feedback_control_DWork->online = 0.0;
+        feedback_control_DWork->online = 0U;
         feedback_control_DWork->Distance_AVG = 0.0;
       } else if (feedback_control_U_Echo_IN == 1.0) {
         /* Transition: '<S1>:124' */
@@ -607,7 +607,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
           feedback_control_IN_CONNECTED;
 
         /* Entry 'CONNECTED': '<S1>:76' */
-        feedback_control_DWork->online = 1.0;
+        feedback_control_DWork->online = 1U;
       } else {
         feedback_control_DWork->check += feedback_control_DWork->step;
       }
@@ -632,7 +632,7 @@ void feedback_control_step(RT_MODEL_feedback_control *const feedback_control_M,
           feedback_control_IN_CONNECTED;
 
         /* Entry 'CONNECTED': '<S1>:76' */
-        feedback_control_DWork->online = 1.0;
+        feedback_control_DWork->online = 1U;
       }
       break;
     }

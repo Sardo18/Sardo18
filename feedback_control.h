@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'feedback_control'.
  *
- * Model version                  : 1.89
+ * Model version                  : 1.93
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri May 28 18:03:06 2021
+ * C/C++ source code generated on : Mon Jun 21 20:00:01 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -47,8 +47,6 @@ typedef struct {
   real_T measure3;                     /* '<Root>/Chart' */
   real_T measure4;                     /* '<Root>/Chart' */
   real_T Distance_AVG;                 /* '<Root>/Chart' */
-  real_T ready_to_compute;             /* '<Root>/Chart' */
-  real_T online;                       /* '<Root>/Chart' */
   real_T step;                         /* '<Root>/Chart' */
   real_T m1;                           /* '<Root>/Chart' */
   real_T m3;                           /* '<Root>/Chart' */
@@ -66,6 +64,8 @@ typedef struct {
   uint8_T is_ERROR_BLINK;              /* '<Root>/Chart' */
   uint8_T is_OTHER_BLINK;              /* '<Root>/Chart' */
   uint8_T is_FROM_10_TO_100_BLINK;     /* '<Root>/Chart' */
+  uint8_T ready_to_compute;            /* '<Root>/Chart' */
+  uint8_T online;                      /* '<Root>/Chart' */
 } D_Work_feedback_control;
 
 /* Real-time Model Data Structure */
